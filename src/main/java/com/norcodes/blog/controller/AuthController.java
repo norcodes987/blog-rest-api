@@ -4,12 +4,16 @@ import com.norcodes.blog.payload.JWTAuthResponse;
 import com.norcodes.blog.payload.LoginDto;
 import com.norcodes.blog.payload.RegisterDto;
 import com.norcodes.blog.service.AuthService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(
+        name = "CRUD REST APIs for Auth Resource"
+)
 public class AuthController {
     private AuthService authService;
 

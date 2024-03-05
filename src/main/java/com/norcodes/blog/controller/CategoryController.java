@@ -3,6 +3,8 @@ package com.norcodes.blog.controller;
 import com.norcodes.blog.entity.Category;
 import com.norcodes.blog.payload.CategoryDto;
 import com.norcodes.blog.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
+@Tag(
+        name = "CRUD REST APIs for Category Resource"
+)
 public class CategoryController {
     private CategoryService categoryService;
 
@@ -20,6 +25,9 @@ public class CategoryController {
     }
 
     //build add category rest api
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto categoryDto) {
@@ -41,6 +49,9 @@ public class CategoryController {
     }
 
     //build update category rest api
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{id}")
     public ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto categoryDto,
@@ -50,6 +61,9 @@ public class CategoryController {
     }
 
     //build delete category delete rest api
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable("id") Long categoryId) {
